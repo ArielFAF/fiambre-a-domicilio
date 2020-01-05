@@ -1,11 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyByIygaP8GInbNx4IBhH9ld5PnLlGvrHlE",
-    authDomain: "listacompras-1b933.firebaseapp.com",
-    databaseURL: "https://listacompras-1b933.firebaseio.com",
-    projectId: "listacompras-1b933",
-    storageBucket: "",
-    messagingSenderId: "54129444258"
+    apiKey: "AIzaSyBDZk9WUBO7JkyG0Tu1aMTGh3W9mt_ItsQ",
+    authDomain: "fiambre-a-domicilio.firebaseapp.com",
+    databaseURL: "https://fiambre-a-domicilio.firebaseio.com",
+    projectId: "fiambre-a-domicilio",
+    storageBucket: "fiambre-a-domicilio.appspot.com",
+    messagingSenderId: "633839038447"
+    // appID: "app-id",
   }
+  
 };
