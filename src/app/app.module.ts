@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 //componets
 
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CarritoComponent
+    CarritoComponent,
+    FooterComponent
     // ProductsComponent
   ],
   imports: [

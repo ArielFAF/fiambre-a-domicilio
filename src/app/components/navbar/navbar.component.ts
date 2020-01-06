@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { Location } from '@angular/common';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, public productService: ProductService,public router: Router) { }
   public app_name = 'Books Store';
   public isLogged = false;
 
@@ -23,4 +25,7 @@ export class NavbarComponent implements OnInit {
   onCheckUser(): void {
   }
 
+  goHome() {
+    this.router.navigateByUrl('/home');
+  }
 }

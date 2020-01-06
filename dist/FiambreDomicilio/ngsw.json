@@ -9,7 +9,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.6be845a6080cff34beb0.js",
+        "/main.81f4100bb5da6a052d82.js",
         "/polyfills.cf535d2993b5def59ab4.js",
         "/runtime.6afe30102d8fe7337431.js",
         "/scripts.b54907eec31c78c1435d.js",
@@ -38,9 +38,9 @@
   "hashTable": {
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
-    "/index.html": "6144b07a2f0ffefbf166b03fd30336cba46bedbf",
+    "/index.html": "36a17767b60eeec0ca47dabb13e99d9a76a1604c",
     "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
-    "/main.6be845a6080cff34beb0.js": "156df455f9704d43e9561561202713cbbae61697",
+    "/main.81f4100bb5da6a052d82.js": "a7fac330c47a22bfdd6c0e58dd0bd6420b48b96b",
     "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
     "/polyfills.cf535d2993b5def59ab4.js": "b7e2a904d991459f495b427233e93871eeb45c6b",
     "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
