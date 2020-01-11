@@ -1,38 +1,90 @@
-<div class="card" style="margin-top: 4.5rem;">
-    <div class="card-body">
-      <h6 class="text-center">Lista de productos
-        <button type="button" class="btn btn-success" (click)="goCarrito()">
-            <span style="font-size: 15px;">
-                <i class="fas fa-shopping-cart"></i>
-              </span>
+<!-- <div class="card" style="margin-top: 4.5rem;">
+  <div class="card-body"> -->
+    <h6 class="text-center" style="margin-top: 4rem;">Lista de productos
+      <button type="button" class="btn btn-success" (click)="goCarrito()">
+        <span style="font-size: 15px;">
+          <i class="fas fa-shopping-cart"></i>
+        </span>
+
+        <span class="badge badge-success">{{productService.selectedCount}}</span>
+      </button>
+    </h6>
+
+    <div class="row">
+      <div class="col">
+    
+        <ng-container>
+    
+        <div class="card card-color" *ngFor="let product of productList">
+    
+          <div class="card-body">
+            <img src='{{product.imagen}}' alt='{{product.nombre}}' style="float:right;width:100px;height:100px;">
             
-            <span class="badge badge-success">{{productService.selectedCount}}</span>
-          </button>
+            <h5 class="card-title"> {{product.nombre}}</h5>
+            
+            <p class="card-text-value">$ {{product.precio}} x Kg | Total: {{product.peso}} kg</p>
+            <!-- <p class="card-text-exp text-center">(Precio en efectivo. Hasta agotar stock,segun disponibilidad en el momento de la venta)</p> -->
+          
+            <div class="row">
+              <div class="col-2" style="margin: 5px 0 0 10px;">
+                <a class="btn btn-info text-white float-right" (click)="onAdd(product)">
+                  <i class="fas fa-plus-circle"></i>
+                </a>
+              </div>
+              <div class="col-8" style="padding-top: 15px;">Pieza entera: $ {{product.precio * product.peso}}</div>
+              
+            </div>
+            
+            <div class="row" *ngIf="product.por_mitad">
+              <div class="col-2" style="margin: 5px 0 0 10px;">
+                <a class="btn btn-success text-white float-right" (click)="onAdd(product)">
+                  <i class="fas fa-plus-circle"></i>
+                </a>
+              </div>
+              <div class="col-8" style="padding-top: 15px;">Media entera: $ {{product.precio * product.peso / 2}}</div>
+              
+            </div>
+           
+          </div>
+        </div>
+    
+        </ng-container>
 
-          <!-- <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Ver carrito ({{productService.selectedCount}})</a> -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
 
-        <!-- <span style="font-size: 25px; color: green;">
-            <i class="fas fa-shopping-cart"></i>
-          </span>   -->
-        </h6>
-      <table class="table table-sm table-hover">
-        <tbody>
-          <tr *ngFor="let product of productList">
-            <td>{{product.nombre}}</td>
-            <td>$ {{product.precio}}</td>
-            <td style="width: 50px;">
-              <a class="btn btn-info text-white" (click)="onAdd(product)">
-                <i class="fas fa-plus-circle"></i>
-              </a>
-              <!-- <a class="btn btn-danger text-white" (click)="onDelete(product.$key)">
-                <i class="fas fa-minus-circle"></i>
-              </a> -->
-            </td>
-            <!-- <td>{{product.cantidad}}</td> -->
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- </div>
+</div> -->
+
+
+<!-- <div class="card" style="margin-top: 4.5rem;">
+  <div class="card-body">
+    <h6 class="text-center">Lista de productos
+      <button type="button" class="btn btn-success" (click)="goCarrito()">
+        <span style="font-size: 15px;">
+          <i class="fas fa-shopping-cart"></i>
+        </span>
+
+        <span class="badge badge-success">{{productService.selectedCount}}</span>
+      </button>
+    </h6>
+
+    <table class="table table-sm table-hover">
+      <tbody>
+        <tr *ngFor="let product of productList">
+          <td>{{product.nombre}}</td>
+          <td>$ {{product.precio}}</td>
+          <td style="width: 50px;">
+            <a class="btn btn-info text-white" (click)="onAdd(product)">
+              <i class="fas fa-plus-circle"></i>
+            </a>
+
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div> -->
 
-  <app-footer></app-footer>
+<app-footer [whatsapp]='true'></app-footer>

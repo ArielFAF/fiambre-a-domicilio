@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
         let x = element.payload.toJSON();
         x['$key'] = element.key;
         x['cantidad'] = 0;
+        // x['por_mitad']= true;
         this.productList.push(x as Product);
       });
     });
