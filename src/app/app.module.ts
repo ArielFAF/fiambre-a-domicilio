@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { FormsModule } from "@angular/forms";
 
@@ -12,6 +12,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {registerLocaleData} from '@angular/common';
+import localeEs from '@angular/common/locales/es-AR';
 
 
 //firebase 
@@ -25,12 +28,15 @@ import { FooterComponent } from './components/footer/footer.component';
 //componets
 
 //services
+import {ProductService} from './services/product.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'carrito', component: CarritoComponent }
 ];
+
+registerLocaleData(localeEs, 'es-AR');
 
 @NgModule({
   declarations: [
@@ -43,6 +49,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     FormsModule,
@@ -55,7 +62,8 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    // ProductService
+    {provide: LOCALE_ID, useValue: 'es-AR'},
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

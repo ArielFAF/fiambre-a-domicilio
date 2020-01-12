@@ -1,13 +1,61 @@
-<div class="card" style="margin-top: 4.5rem;">
-  <p>
-    Productos seleccionados: {{productService.selectedCount}}
-  </p>
+<!-- <div class="row" style="margin-top: 4rem;">
+  <div class="col-12" style="margin-right: 5px;">Vaciar carrito
+    <a class="btn btn-danger text-white float-right" (click)="vaciar()">
+      <i class="fas fa-trash-alt"></i>
+    </a>
+  </div>
+</div> -->
+
+
+<div class="card" style="margin-top: 4rem;">
+  <div class="card-body">
+    <h5 class="text-center" style="margin-bottom: 0px !important;">Productos Seleccionados</h5>
+    <h6 class="text-center" style="color: red;">(LOS KG. SON APROXIMADOS)</h6>
+    <table class="table table-sm table-hover">
+      <tbody>
+        <tr *ngFor="let product of productService.selectedProducts">
+          <td style="vertical-align: middle;">
+            <a class="btn btn-danger text-white" (click)="productService.deleteProduct(product.$key)">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+          <td style="vertical-align: middle;">{{product.nombre}}</td>
+          <td style="vertical-align: middle;">{{product.cantidad}}</td>
+          <td style="vertical-align: middle;">
+            <a class="btn btn-info text-white" (click)="productService.onChange(product,0.5)" style="margin: 3px 3px 3px 0px">
+              <i class="fas fa-plus-circle"></i>
+            </a>
+            <a class="btn btn-warning text-white" (click)="productService.onChange(product,-0.5)">
+              <i class="fas fa-minus-circle"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>Revise su pedido y pulse el boton para enviarlo <a href="https://api.whatsapp.com/send?phone=5492216209330&text=Hola, quisiera hacer el siguiente pedido: fjasldfsa, fasdkfjkdas, fsafads." target="_blank">
-    <span style="font-size: 35px; color: rgb(77, 255, 71);">
-      <i class="fab fa-whatsapp-square"></i>
-    </span>
-  </a></div>
+<div class="row">
+  <div class="col text-center">
+    <h6>
+      Revise su pedido. Luego, pulse el boton
+    </h6>
+    <a href={{productService.textoPedido}}
+      target="_blank">
+      <!-- <a href="https://api.whatsapp.com/send?phone=5492216209330&text=Hola, quisiera hacer el siguiente pedido: fjasldfsa, fasdkfjkdas, fsafads." -->
+
+      <button type="button" class="btn btn-outline-success btn-md">
+        <span style="font-size: 30px; color: rgb(77, 255, 71);">
+          ENVIAR
+        </span>
+        <span style="font-size: 30px; color: rgb(77, 255, 71);">
+          <i class="fab fa-whatsapp-square"></i>
+        </span>
+
+      </button>
+
+    </a>
+  </div>
+</div>
 
 <app-footer></app-footer>

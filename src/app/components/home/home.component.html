@@ -15,33 +15,34 @@
     
         <ng-container>
     
-        <div class="card card-color" *ngFor="let product of productList">
+        <div class="card card-color" *ngFor="let product of productService.products">
     
           <div class="card-body">
             <img src='{{product.imagen}}' alt='{{product.nombre}}' style="float:right;width:100px;height:100px;">
             
             <h5 class="card-title"> {{product.nombre}}</h5>
             
-            <p class="card-text-value">$ {{product.precio}} x Kg | Total: {{product.peso}} kg</p>
+            <p class="card-text-value">Precio por kg.: {{product.precio | currency:'$'}}</p>
+            <p class="card-text-value">Peso aprox.: {{product.peso}} kg</p>
             <!-- <p class="card-text-exp text-center">(Precio en efectivo. Hasta agotar stock,segun disponibilidad en el momento de la venta)</p> -->
           
             <div class="row">
               <div class="col-2" style="margin: 5px 0 0 10px;">
-                <a class="btn btn-info text-white float-right" (click)="onAdd(product)">
+                <a class="btn btn-info text-white float-right" (click)="productService.onChange(product,1)">
                   <i class="fas fa-plus-circle"></i>
                 </a>
               </div>
-              <div class="col-8" style="padding-top: 15px;">Pieza entera: $ {{product.precio * product.peso}}</div>
+              <div class="col-8" style="padding-top: 15px;">Pieza entera: {{(product.precio * product.peso).toFixed(2) | currency:'$'}}</div>
               
             </div>
             
             <div class="row" *ngIf="product.por_mitad">
               <div class="col-2" style="margin: 5px 0 0 10px;">
-                <a class="btn btn-success text-white float-right" (click)="onAdd(product)">
+                <a class="btn btn-success text-white float-right" (click)="productService.onChange(product,0.5)">
                   <i class="fas fa-plus-circle"></i>
                 </a>
               </div>
-              <div class="col-8" style="padding-top: 15px;">Media entera: $ {{product.precio * product.peso / 2}}</div>
+              <div class="col-8" style="padding-top: 15px;">Media pieza: {{(product.precio * product.peso / 2).toFixed(2) | currency:'$'}}</div>
               
             </div>
            
