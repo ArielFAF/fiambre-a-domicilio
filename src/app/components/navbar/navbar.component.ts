@@ -12,7 +12,7 @@ import * as _ from "lodash";
 })
 export class NavbarComponent implements OnInit {
 
-  private busqueda: string = '';
+  busqueda: string = '';
   constructor(private location: Location, public productService: ProductService, public router: Router) { }
 
   ngOnInit() {
