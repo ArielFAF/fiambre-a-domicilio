@@ -29,11 +29,13 @@ import { FooterComponent } from './components/footer/footer.component';
 
 //services
 import {ProductService} from './services/product.service';
+import { AdministracionComponent } from './components/administracion/administracion.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
-  { path: 'carrito', component: CarritoComponent }
+  { path: 'carrito', component: CarritoComponent },
+  { path: 'administracion', component: AdministracionComponent }
 ];
 
 registerLocaleData(localeEs, 'es-AR');
@@ -44,7 +46,8 @@ registerLocaleData(localeEs, 'es-AR');
     NavbarComponent,
     HomeComponent,
     CarritoComponent,
-    FooterComponent
+    FooterComponent,
+    AdministracionComponent
     // ProductsComponent
   ],
   imports: [

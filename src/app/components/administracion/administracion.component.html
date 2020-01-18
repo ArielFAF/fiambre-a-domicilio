@@ -1,0 +1,23 @@
+<div class="card mt-5" style="margin-top: 4rem;">
+  <div class="card-body" *ngIf="productService?.config?.$key">
+    <form #administracionForm="ngForm" (ngSubmit)="onSubmit(administracionForm)">
+      <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="productService.config.$key">
+      <div class="form-group">
+
+        <input type="text" class="form-control" name="telefono" #telefono="ngModel" 
+          [(ngModel)]="productService.config.telefono" placeholder="Agrega un telefono">
+
+          <input type="text" class="form-control" name="clave" #clave="ngModel" 
+          [(ngModel)]="productService.config.clave" placeholder="Agrega una clave">
+
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-success" type="submit">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+      </div>
+
+  </form>
+  </div>
+</div>

@@ -1,12 +1,3 @@
-<!-- <div class="row" style="margin-top: 4rem;">
-  <div class="col-12" style="margin-right: 5px;">Vaciar carrito
-    <a class="btn btn-danger text-white float-right" (click)="vaciar()">
-      <i class="fas fa-trash-alt"></i>
-    </a>
-  </div>
-</div> -->
-
-
 <div class="card" style="margin-top: 4rem;">
   <div class="card-body">
     <h5 class="text-center" style="margin-bottom: 0px !important;">Productos Seleccionados</h5>
@@ -35,16 +26,46 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="productService.selectedCount > 0" class="row" style="margin-top: 10px;">
+  <div class="col-2">Envio: </div>
+  <div class="col-8">
+    <select name="envio" id="envio" [(ngModel)]="productService.costo_envio" class="ancho200">
+      <option [ngValue]="g" *ngFor="let g of productService.gasto">
+        {{g.lugar}}
+      </option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="productService.selectedCount > 0 && productService.costo_envio.lugar !=='' " class="row">
   <div class="col text-center">
     <h6>
-      Revise su pedido. Luego, pulse el boton
+      Revise su pedido y pulse el boton
     </h6>
-    <a href={{productService.textoPedido}}
+    
+      <button type="button" class="btn btn-success btn-md" (click)="calcularTotal()">
+        <span style="font-size: 30px; color: white;">
+          COSTO
+        </span>
+        <span style="font-size: 30px; color: white;">
+          <i class="fas fa-search-dollar"></i>
+        </span>
+
+      </button>
+
+  </div>
+</div>
+
+<div *ngIf="productService.selectedCount > 0" class="row">
+  <div class="col text-center">
+    <h3 *ngIf="productService.total > 0">
+      TOTAL: {{productService.total | currency:'$'}}
+    </h3>
+    <a *ngIf="productService.total > 0" href={{productService.textoPedido}}
       target="_blank">
       <!-- <a href="https://api.whatsapp.com/send?phone=5492216209330&text=Hola, quisiera hacer el siguiente pedido: fjasldfsa, fasdkfjkdas, fsafads." -->
 
-      <button type="button" class="btn btn-outline-success btn-md">
+      <button type="button" class="btn btn-outline-success btn-md" (click)="enviar()">
         <span style="font-size: 30px; color: rgb(77, 255, 71);">
           ENVIAR
         </span>

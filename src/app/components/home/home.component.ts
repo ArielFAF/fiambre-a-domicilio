@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
     // localStorage.setItem("users", JSON.stringify(users));
 
   ngOnInit() {
+    this.productService.getConfig();
+    this.productService.getGastoEnvio();
+
     this.productService.selectedProducts = JSON.parse(localStorage.getItem("selectedProducts") || "[]");
 
     this.productService.selectedCount = 0;

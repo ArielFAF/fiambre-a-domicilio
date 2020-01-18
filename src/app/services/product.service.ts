@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Product } from '../models/product';
 import * as _ from "lodash";
+import { Config } from '../models/config';
+import { Gasto } from '../models/gasto';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +12,27 @@ export class ProductService {
 
   productList: AngularFireList<any>;
 
+  configRecord: AngularFireList<any>;
+
   selectedProducts: Product[];
 
   selectedCount: number = 0;
 
   products: Product[];
 
-  textoBase: string = 'https://api.whatsapp.com/send?phone=5492216209330&text=Hola, quisiera hacer el siguiente pedido: ';
+  costo_envio: Gasto = {$key: null, costo: 0, lugar: ""};
+
+  total = 0;
+
+  // textoBase: string = 'https://api.whatsapp.com/send?phone=5492216209330&text=Hola, quisiera hacer el siguiente pedido: ';
+  textoBase: string = "https://wa.me/";
+  textoIntermedio: string = "?text=Hola, quisiera hacer el siguiente pedido: ";
 
   textoPedido: string;
+
+  config: Config;
+
+  gasto: Gasto[];
 
   constructor(private firebase: AngularFireDatabase) { }
 
@@ -26,8 +40,42 @@ export class ProductService {
     return this.productList = this.firebase.list('products');
   }
 
+  getConfig() {
+    this.configRecord = this.firebase.list('config');
+    
+    this.firebase.list('config')
+    .snapshotChanges()
+    .subscribe(item => {
+      item.forEach(element => {
+        let x = element.payload.toJSON();
+        x['$key'] = element.key;
+        this.config = x as Config;
+        // console.log(this.config);
+      });
+    });
+
+  }
+
+  getGastoEnvio() {
+    
+    this.firebase.list('gasto_envio')
+    .snapshotChanges()
+    .subscribe(item => {
+      this.gasto = [];
+      item.forEach(element => {
+        let x = element.payload.toJSON();
+        x['$key'] = element.key;
+        this.gasto.push(x as Gasto);
+      });
+    });
+
+  }
+
   onChange(product: Product, cantidad: number) {
     let encontrado = false;
+
+    this.total = 0;
+    this.costo_envio = {$key: null, costo: 0, lugar: ""};
 
     _.forEach(this.selectedProducts,
       (p: any) => {
@@ -53,6 +101,13 @@ export class ProductService {
     this.stringParaEnvio();
   }
 
+  vaciarCarrito() {
+    this.selectedCount = 0;
+    this.selectedProducts = [];
+    localStorage.setItem("selectedProducts", JSON.stringify(this.selectedProducts));
+    this.stringParaEnvio();
+  }
+
   UpdateSelectedProducts() {
     _.forEach(this.selectedProducts,
       (sp: Product) => {
@@ -68,6 +123,8 @@ export class ProductService {
 
       }
     );
+
+    this.stringParaEnvio();
   }
 
   Add(product:Product, cantidad: number) {
@@ -83,16 +140,24 @@ export class ProductService {
     });
   }
 
-  updateProduct(product: Product) {
-    this.productList.update(product.$key, {
-      nombre: product.nombre,
-      // category: product.category,
-      // location: product.location,
-      // price: product.price
+  updateConfig(config: Config) {
+    this.configRecord.update(config.$key, {
+      telefono: config.telefono,
+      clave: config.clave
     });
   }
 
   deleteProduct($key: string) {
+    this.total = 0;
+
+    _.forEach(this.products,
+      (p: Product) => {
+        if(p.$key === $key) {
+          this.selectedCount = this.selectedCount - p.cantidad;
+          return;              
+        }
+      }
+    );
 
     _.remove(this.selectedProducts, (p: any) => {
       return p.$key === $key
@@ -103,7 +168,7 @@ export class ProductService {
   }
 
   stringParaEnvio() {
-    let texto = this.textoBase;
+    let texto = this.textoBase + this.config.telefono + this.textoIntermedio;
 
     _.forEach(this.selectedProducts,
       (p: any) => {
@@ -113,7 +178,9 @@ export class ProductService {
       }
     );
 
-    this.textoPedido = texto;
+    texto = texto + "Lugar: " + this.costo_envio.lugar + ". Total: $" + this.total;
+
+    this.textoPedido = texto.replace(/ /g,'%20');
 
   }
   
