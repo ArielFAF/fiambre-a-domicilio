@@ -37,7 +37,8 @@ export class ProductService {
   constructor(private firebase: AngularFireDatabase) { }
 
   getProducts() {
-    return this.productList = this.firebase.list('products');
+    // return this.productList = this.firebase.list('products');
+    return this.productList = this.firebase.list('products',ref => ref.orderByChild('nombre'));
   }
 
   getConfig() {

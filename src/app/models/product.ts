@@ -6,4 +6,5 @@ export class Product {
     imagen: string;
     peso: number;
     por_mitad: boolean;
+    activo: boolean;
 }

@@ -16,24 +16,24 @@ export class HomeComponent implements OnInit {
 
   constructor(public productService: ProductService, private router: Router
     // private toastr: ToastrService
-    ) { }
+  ) { }
 
-    // // Loading
-    // var users = JSON.parse(localStorage.getItem("users") || "[]");
-    // console.log("# of users: " + users.length);
-    // users.forEach(function(user, index) {
-    //     console.log("[" + index + "]: " + user.id);
-    // });
+  // // Loading
+  // var users = JSON.parse(localStorage.getItem("users") || "[]");
+  // console.log("# of users: " + users.length);
+  // users.forEach(function(user, index) {
+  //     console.log("[" + index + "]: " + user.id);
+  // });
 
-    // // Modifying
-    // var user = {
-    //     id: Math.floor(Math.random() * 1000000)
-    // };
-    // users.push(user);
-    // console.log("Added user #" + user.id);
+  // // Modifying
+  // var user = {
+  //     id: Math.floor(Math.random() * 1000000)
+  // };
+  // users.push(user);
+  // console.log("Added user #" + user.id);
 
-    // // Saving
-    // localStorage.setItem("users", JSON.stringify(users));
+  // // Saving
+  // localStorage.setItem("users", JSON.stringify(users));
 
   ngOnInit() {
     this.productService.getConfig();
@@ -49,18 +49,20 @@ export class HomeComponent implements OnInit {
     );
 
     this.productService.getProducts()
-    .snapshotChanges()
-    .subscribe(item => {
-      this.productService.products = [];
-      item.forEach(element => {
-        let x = element.payload.toJSON();
-        x['$key'] = element.key;
-        this.productService.products.push(x as Product);
+      .snapshotChanges()
+      .subscribe(item => {
+        this.productService.products = [];
+        item.forEach(element => {
+          let x = element.payload.toJSON();
+          if (x['activo']) {
+            x['$key'] = element.key;
+            this.productService.products.push(x as Product);
+          }
+        });
+        // Saving
+        localStorage.setItem("productList", JSON.stringify(this.productService.products));
       });
-      // Saving
-      localStorage.setItem("productList", JSON.stringify(this.productService.products));
-    });
-    
+
   }
 
   // onChange(product: Product, cantidad: number) {
@@ -87,7 +89,7 @@ export class HomeComponent implements OnInit {
   // }
 
   onDelete($key: string) {
-      // this.productService.deleteProduct($key);
+    // this.productService.deleteProduct($key);
   }
 
   goCarrito() {
