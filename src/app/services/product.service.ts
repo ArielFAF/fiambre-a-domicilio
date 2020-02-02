@@ -34,6 +34,8 @@ export class ProductService {
 
   gasto: Gasto[];
 
+  inicio: boolean = true;
+
   constructor(private firebase: AngularFireDatabase) { }
 
   getProducts() {
@@ -74,6 +76,14 @@ export class ProductService {
 
   onChange(product: Product, cantidad: number) {
     let encontrado = false;
+    
+    if(!product.por_mitad) {
+      if(cantidad>0) {
+        cantidad = 1;
+      } else {
+        cantidad = -1;
+      }
+    }
 
     this.total = 0;
     this.costo_envio = {$key: null, costo: 0, lugar: ""};

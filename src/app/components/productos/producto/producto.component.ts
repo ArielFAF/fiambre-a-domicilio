@@ -12,7 +12,7 @@ export class ProductoComponent implements OnInit {
 
   constructor(public listaProductosService: ListaProductosService
     // private toastr: ToastrService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.listaProductosService.getProducts();
@@ -20,17 +20,19 @@ export class ProductoComponent implements OnInit {
   }
 
   onSubmit(productForm: NgForm) {
-    if(productForm.value.$key == null) {
-      this.listaProductosService.insertProduct(productForm.value);
+    if (productForm.value.$key == null) {
+      if (productForm.value.nombre != null) {
+        this.listaProductosService.insertProduct(productForm.value);
+      }
     }
     else {
-      this.listaProductosService.updateProduct(productForm.value); 
+      this.listaProductosService.updateProduct(productForm.value);
     }
     this.resetForm(productForm);
   }
 
   resetForm(productForm?: NgForm) {
-    if(productForm != null) {
+    if (productForm != null) {
       productForm.reset();
       this.listaProductosService.selectedProduct = new Product();
     }

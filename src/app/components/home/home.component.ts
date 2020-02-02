@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
       }
     );
 
+    if(this.productService.inicio) {
     this.productService.getProducts()
       .snapshotChanges()
       .subscribe(item => {
@@ -62,6 +63,8 @@ export class HomeComponent implements OnInit {
         // Saving
         localStorage.setItem("productList", JSON.stringify(this.productService.products));
       });
+      this.productService.inicio = false;
+    }
 
   }
 
