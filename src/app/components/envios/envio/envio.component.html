@@ -1,0 +1,35 @@
+<div class="card mt-1">
+  <div class="card-body">
+    <form #envioForm="ngForm" (ngSubmit)="onSubmit(envioForm)">
+      <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="enviosService.selectedGasto.$key">
+      <div class="form-group">
+
+        <input type="text" class="form-control" name="lugar" #lugar="ngModel"
+          [(ngModel)]="enviosService.selectedGasto.lugar" placeholder="Agregar un lugar" required>
+
+        <div class="row">
+          <div class="col-6">
+            Costo de envio
+          </div>
+          <div class="col-6">
+            <input type="number" class="form-control" name="costo" #costo="ngModel"
+              [(ngModel)]="enviosService.selectedGasto.costo" required>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <button class="btn btn-primary" type="submit">
+          <i class="fas fa-plus-circle"></i> Grabar
+        </button>
+
+        <button style="margin-left: 5px" class="btn btn-secondary" type="reset" (click)="resetForm(envioForm)">
+          <i class="fas fa-sync-alt"></i> Nuevo
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+

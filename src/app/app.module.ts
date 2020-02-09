@@ -16,30 +16,39 @@ import { CommonModule } from '@angular/common';
 import {registerLocaleData} from '@angular/common';
 import localeEs from '@angular/common/locales/es-AR';
 
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //firebase 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
+
+//componets
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-//componets
-
-//services
-import {ProductService} from './services/product.service';
 import { AdministracionComponent } from './components/administracion/administracion.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ProductoComponent } from './components/productos/producto/producto.component';
 import { ListaProductosComponent } from './components/productos/lista-productos/lista-productos.component';
+import { EnviosComponent } from './components/envios/envios.component';
+import { ListaEnviosComponent } from './components/envios/lista-envios/lista-envios.component';
+import { EnvioComponent } from './components/envios/envio/envio.component';
+import { LoginComponent } from './components/login/login.component';
+
+//services
+import {ProductService} from './services/product.service';
+import { ListaProductosService } from './services/lista-productos.service';
+import { EnviosService } from './services/envios.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'administracion', component: AdministracionComponent },
-  { path: 'lista-productos', component: ProductosComponent }
+  { path: 'lista-productos', component: ProductosComponent },
+  { path: 'envios', component: EnviosComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 registerLocaleData(localeEs, 'es-AR');
@@ -54,8 +63,11 @@ registerLocaleData(localeEs, 'es-AR');
     AdministracionComponent,
     ProductosComponent,
     ProductoComponent,
-    ListaProductosComponent
-    // ProductsComponent
+    ListaProductosComponent,
+    EnviosComponent,
+    ListaEnviosComponent,
+    EnvioComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +85,9 @@ registerLocaleData(localeEs, 'es-AR');
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'es-AR'},
-    ProductService
+    ProductService,
+    ListaProductosService,
+    EnviosService
   ],
   bootstrap: [AppComponent]
 })

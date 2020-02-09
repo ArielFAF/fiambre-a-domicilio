@@ -61,7 +61,7 @@ export class ProductService {
 
   getGastoEnvio() {
     
-    this.firebase.list('gasto_envio')
+    this.firebase.list('gasto_envio',ref => ref.orderByChild('lugar'))
     .snapshotChanges()
     .subscribe(item => {
       this.gasto = [];

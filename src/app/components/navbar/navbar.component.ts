@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, VERSION, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
 import * as _ from "lodash";
+import { LoginService } from 'src/app/services/login.service';
+import { NgForm } from '@angular/forms';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -12,11 +16,26 @@ import * as _ from "lodash";
 })
 export class NavbarComponent implements OnInit {
 
+  @ViewChild('navbarToggler', {read: false}) navbarToggler: ElementRef;
+
+  angularVersion: string;
+
   busqueda: string = '';
-  constructor(private location: Location, public productService: ProductService, public router: Router) { }
+
+  public navbarCollapsed = true;
+
+  constructor(
+    private location: Location, 
+    public productService: ProductService, 
+    public router: Router,
+    public loginService: LoginService) { }
 
   ngOnInit() {
     this.onCheckUser();
+
+    // setTimeout(() => {
+    // $('#navbarCollapse').removeClass("show");
+    // }, 2500);
   }
 
   onLogout(): void {
@@ -45,7 +64,14 @@ export class NavbarComponent implements OnInit {
     } else {
       this.productService.products = JSON.parse(localStorage.getItem("productList") || "[]");
     }
-
-    this.router.navigateByUrl('/home');
+    
+    this.irA('home');
   }
+  
+  irA(lugar: string) {
+    $('#navbarSupportedContent').removeClass("show");
+    
+    this.router.navigateByUrl('/'+lugar);
+  }
+
 }
