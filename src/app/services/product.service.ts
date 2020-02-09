@@ -86,7 +86,7 @@ export class ProductService {
     }
 
     this.total = 0;
-    this.costo_envio = {$key: null, costo: 0, lugar: ""};
+    // this.costo_envio = {$key: null, costo: 0, lugar: ""};
 
     _.forEach(this.selectedProducts,
       (p: any) => {

@@ -13,6 +13,8 @@ export class CarritoComponent implements OnInit {
   constructor(public productService: ProductService, public router: Router) { }
 
   ngOnInit() {
+    this.productService.costo_envio.lugar ='';
+    this.productService.total = 0;
   }
 
   enviar() {
@@ -28,7 +30,7 @@ export class CarritoComponent implements OnInit {
 
     _.forEach(this.productService.selectedProducts,
       (p: any) => {
-        this.productService.total = this.productService.total + (p.precio * p.peso * p.cantidad);
+        this.productService.total = this.productService.total + (p.precio * p.cantidad);
       }
     );
 
@@ -37,4 +39,7 @@ export class CarritoComponent implements OnInit {
     this.productService.stringParaEnvio();
   }
 
+  limpiarCosto() {
+    this.productService.total = 0;
+  }
 }

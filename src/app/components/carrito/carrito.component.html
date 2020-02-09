@@ -29,7 +29,8 @@
 <div *ngIf="productService.selectedCount > 0" class="row" style="margin-top: 10px;">
   <div class="col-2">Envio: </div>
   <div class="col-8">
-    <select name="envio" id="envio" [(ngModel)]="productService.costo_envio" class="ancho200">
+    <select name="envio" id="envio" [(ngModel)]="productService.costo_envio" class="ancho200"
+    (change)="limpiarCosto()">
       <option [ngValue]="g" *ngFor="let g of productService.gasto">
         {{g.lugar}}
       </option>
