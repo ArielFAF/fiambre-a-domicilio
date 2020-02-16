@@ -30,6 +30,9 @@ export class ProductService {
 
   textoPedido: string;
 
+  // https://api.whatsapp.com/send?phone=5492216209330&text=(hacenos tu consulta)
+  textoContacto: string;
+
   config: Config;
 
   gasto: Gasto[];
@@ -53,7 +56,8 @@ export class ProductService {
         let x = element.payload.toJSON();
         x['$key'] = element.key;
         this.config = x as Config;
-        // console.log(this.config);
+        
+        this.textoContacto = this.textoBase + this.config.telefono + "?text=(hacenos tu consulta)";
       });
     });
 

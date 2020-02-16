@@ -74,4 +74,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/'+lugar);
   }
 
+  goCarrito() {
+    this.productService.UpdateSelectedProducts();
+
+    this.router.navigateByUrl('/carrito');
+  }
+  
 }

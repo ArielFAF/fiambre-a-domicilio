@@ -1,7 +1,9 @@
 <footer style="margin-top: 1rem;">
-  <span>v.1.10 | Copyright © 2020 Fiambre a Domicilio</span>
+  <span>v.1.12 | Copyright © 2020 Fiambre a Domicilio</span>
 
-  <div *ngIf="whatsapp"><a href="https://api.whatsapp.com/send?phone=5492216209330&text=(hacenos tu consulta)" target="_blank">
+  <div *ngIf="whatsapp">
+    <!-- <a href="https://api.whatsapp.com/send?phone=5492216209330&text=(hacenos tu consulta)" target="_blank"> -->
+      <a href="{{productService.textoContacto}}" target="_blank">
     Comunicate con nosotros por
     <span style="font-size: 25px; color: rgb(77, 255, 71);">
       <i class="fab fa-whatsapp-square"></i>

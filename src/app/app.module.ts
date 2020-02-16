@@ -35,6 +35,8 @@ import { EnviosComponent } from './components/envios/envios.component';
 import { ListaEnviosComponent } from './components/envios/lista-envios/lista-envios.component';
 import { EnvioComponent } from './components/envios/envio/envio.component';
 import { LoginComponent } from './components/login/login.component';
+import { AyudaComponent } from './components/ayuda/ayuda.component';
+import { AcercaComponent } from './components/acerca/acerca.component';
 
 //services
 import {ProductService} from './services/product.service';
@@ -48,7 +50,9 @@ const appRoutes: Routes = [
   { path: 'administracion', component: AdministracionComponent },
   { path: 'lista-productos', component: ProductosComponent },
   { path: 'envios', component: EnviosComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'ayuda', component: AyudaComponent },
+  { path: 'acerca', component: AcercaComponent }
 ];
 
 registerLocaleData(localeEs, 'es-AR');
@@ -67,7 +71,9 @@ registerLocaleData(localeEs, 'es-AR');
     EnviosComponent,
     ListaEnviosComponent,
     EnvioComponent,
-    LoginComponent
+    LoginComponent,
+    AyudaComponent,
+    AcercaComponent
   ],
   imports: [
     BrowserModule,
